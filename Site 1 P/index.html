@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOJA DE ROUPAS | Official Store 2026</title>
+    <!-- Link para o CSS Externo -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Fonte Inter do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- CABEÇALHO / NAVBAR -->
+    <header>
+        <div class="logo" onclick="showPage('home')" style="cursor:pointer">LOJA <span>DE ROUPAS</span></div>
+        <nav>
+            <ul>
+                <li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('colecoes')">Coleções</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('sobre')">Sobre</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <div class="cart-icon-container" id="open-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count" class="badge">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SEÇÃO 1: HOME (PÁGINA INICIAL) -->
+    <section id="page-home" class="page active">
+        <div class="hero">
+            <div class="hero-text">
+                <h1>NEW SEASON</h1>
+                <p>O futuro da moda urbana chegou. Descubra a coleção 2026.</p>
+                <button class="btn-primary" onclick="showPage('colecoes')">Ver Vitrine</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: COLEÇÕES (20 PRODUTOS) -->
+    <section id="page-colecoes" class="page container">
+        <h2 class="section-title">Coleção Completa</h2>
+        <div class="product-grid">
+            
+            <!-- Produtos -->
+            <div class="product-card" data-id="1" data-price="189.90">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500')"></div>
+                <div class="product-info"><h4>Vestido Summer Yellow</h4><p class="price">R$ 189,90</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="2" data-price="450.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500')"></div>
+                <div class="product-info"><h4>Jaqueta Black Leather</h4><p class="price">R$ 450,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="3" data-price="89.90">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500')"></div>
+                <div class="product-info"><h4>T-Shirt Minimalist</h4><p class="price">R$ 89,90</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+
+            <div class="product-card" data-id="5" data-price="120.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500')"></div>
+                <div class="product-info"><h4>Boné Street Style</h4><p class="price">R$ 120,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="6" data-price="550.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500')"></div>
+                <div class="product-info"><h4>Sapato Oxford Blue</h4><p class="price">R$ 550,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            
+
+            <div class="product-card" data-id="8" data-price="249.90">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500')"></div>
+                <div class="product-info"><h4>Moletom Oversized</h4><p class="price">R$ 249,90</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="9" data-price="380.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500')"></div>
+                <div class="product-info"><h4>Bolsa Classic Tote</h4><p class="price">R$ 380,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="10" data-price="890.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500')"></div>
+                <div class="product-info"><h4>Relógio Urban Silver</h4><p class="price">R$ 890,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="11" data-price="420.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500')"></div>
+                <div class="product-info"><h4>Tênis Sport Future</h4><p class="price">R$ 420,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="12" data-price="195.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=500')"></div>
+                <div class="product-info"><h4>Saia Midi Plissada</h4><p class="price">R$ 195,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="13" data-price="310.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500')"></div>
+                <div class="product-info"><h4>Casaco de Lã Bege</h4><p class="price">R$ 310,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="14" data-price="145.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500')"></div>
+                <div class="product-info"><h4>T-Shirt Graphic Art</h4><p class="price">R$ 145,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="15" data-price="275.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500')"></div>
+                <div class="product-info"><h4>Jeans Slim Fit</h4><p class="price">R$ 275,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="16" data-price="620.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500')"></div>
+                <div class="product-info"><h4>Blazer Executivo</h4><p class="price">R$ 620,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="17" data-price="110.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1520006403909-838d6b92c22e?w=500')"></div>
+                <div class="product-info"><h4>Cinto Couro legítimo</h4><p class="price">R$ 110,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="18" data-price="230.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500')"></div>
+                <div class="product-info"><h4>Shorts Denim High</h4><p class="price">R$ 230,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="19" data-price="480.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=500')"></div>
+                <div class="product-info"><h4>Tênis Casual White</h4><p class="price">R$ 480,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+
+            <div class="product-card" data-id="20" data-price="135.00">
+                <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1508296695146-257a814070b4?w=500')"></div>
+                <div class="product-info"><h4>Óculos Aviador Gold</h4><p class="price">R$ 135,00</p><button class="add-to-cart-btn">Comprar</button></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: SOBRE -->
+    <section id="page-sobre" class="page container">
+        <div class="about-section">
+            <h2 class="section-title">Nossa Essência</h2>
+            <div class="about-grid">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600" alt="Sobre a Loja">
+                <div class="about-text">
+                    <p>A <strong>LOJA DE ROUPAS</strong> é o resultado de uma visão moderna sobre o vestuário urbano. Nascida em 2026, nossa marca foca em entregar qualidade premium com designs que transcendem o tempo.</p>
+                    <p>Acreditamos na sustentabilidade e no comércio justo. Cada peça é pensada para oferecer o máximo conforto sem abrir mão do estilo que você merece.</p>
+                    <button class="btn-primary" style="margin-top:20px">Fale Conosco</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARRINHO LATERAL -->
+    <div id="overlay" class="overlay"></div>
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Sua Sacola</h3>
+            <span id="close-cart" class="close-btn">&times;</span>
+        </div>
+        <div id="cart-items-container" class="cart-body">
+            <!-- Gerado via JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="total-price">R$ 0,00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; Simulação de loja </p>
+            <div class="socials">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-tiktok"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chamada do JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
