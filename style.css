@@ -1,92 +1,108 @@
-:root {
-    --primary: #ff4757;
-    --dark: #2f3542;
-    --light: #f1f2f6;
-    --white: #ffffff;
+// Memória do Carrinho
+let cart = JSON.parse(localStorage.getItem('vibe_store_cart')) || [];
+
+// Elementos da Interface
+const sidebar = document.getElementById('cart-sidebar');
+const overlay = document.getElementById('overlay');
+const cartItemsContainer = document.getElementById('cart-items-container');
+const cartCount = document.getElementById('cart-count');
+const totalPriceEl = document.getElementById('total-price');
+
+// 1. NAVEGAÇÃO ENTRE PÁGINAS
+function showPage(pageId) {
+    // Esconde todas as páginas
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    // Mostra a página desejada
+    document.getElementById('page-' + pageId).classList.add('active');
+    
+    // Fecha carrinho se mudar de página
+    closeCart();
+    // Volta ao topo
+    window.scrollTo(0, 0);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+// 2. CONTROLE DO CARRINHO (ABRIR/FECHAR)
+document.getElementById('open-cart').onclick = openCart;
+document.getElementById('close-cart').onclick = closeCart;
+overlay.onclick = closeCart;
 
-body { background: var(--white); color: var(--dark); overflow-x: hidden; }
-
-/* Navegação */
-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 8%; background: var(--white); position: sticky; top: 0; z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+function openCart() {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
 }
 
-.logo { font-weight: 900; font-size: 1.6rem; letter-spacing: -1px; }
-.logo span { color: var(--primary); }
-
-nav ul { display: flex; list-style: none; gap: 40px; }
-nav ul a { text-decoration: none; color: var(--dark); font-weight: 600; transition: 0.3s; }
-nav ul a:hover { color: var(--primary); }
-
-.header-icons { display: flex; align-items: center; gap: 25px; cursor: pointer; }
-.cart-icon-container { position: relative; font-size: 1.3rem; }
-.badge {
-    position: absolute; top: -10px; right: -12px;
-    background: var(--primary); color: white;
-    font-size: 11px; padding: 3px 7px; border-radius: 50%;
+function closeCart() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
 }
 
-/* Lógica de Páginas */
-.page { display: none; min-height: 80vh; animation: fadeIn 0.4s ease-in-out; }
-.page.active { display: block; }
+// 3. LÓGICA DE PRODUTOS
+document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+    button.onclick = (e) => {
+        const card = e.target.closest('.product-card');
+        const product = {
+            id: card.dataset.id,
+            name: card.querySelector('h4').innerText,
+            price: parseFloat(card.dataset.price),
+            img: card.querySelector('.product-img').style.backgroundImage
+        };
+        addToCart(product);
+    };
+});
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+function addToCart(product) {
+    cart.push(product);
+    updateUI();
+    saveCart();
+    openCart(); // Abre o carrinho ao adicionar
 }
 
-/* Hero Section */
-.hero {
-    height: 85vh;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200') center/cover;
-    display: flex; align-items: center; justify-content: center; color: white; text-align: center;
-}
-.hero h1 { font-size: 4.5rem; letter-spacing: 2px; }
-.btn-primary { 
-    margin-top: 20px; padding: 15px 40px; background: var(--primary); 
-    color: white; border: none; font-weight: bold; cursor: pointer; border-radius: 4px;
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateUI();
+    saveCart();
 }
 
-/* Vitrine de Produtos */
-.container { padding: 80px 8%; }
-.section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; text-transform: uppercase; }
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+function updateUI() {
+    // Atualiza Lista
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
 
-.product-card { background: #fff; transition: 0.3s; border-radius: 8px; overflow: hidden; }
-.product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-.product-img { height: 400px; background-size: cover; background-position: center; }
-.product-info { padding: 20px; text-align: center; }
-.price { color: var(--primary); font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
-.add-to-cart-btn { 
-    width: 100%; padding: 12px; background: var(--dark); color: white; 
-    border: none; cursor: pointer; font-weight: 600; border-radius: 4px;
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartItemsContainer.innerHTML += `
+            <div class="cart-item">
+                <div style="display:flex; align-items:center; gap:15px">
+                    <div style="width:60px; height:60px; background-size:cover; border-radius:5px; background-image: ${item.img}"></div>
+                    <div>
+                        <h5 style="margin:0">${item.name}</h5>
+                        <p style="color:var(--primary); font-weight:bold; margin:0">R$ ${item.price.toFixed(2)}</p>
+                    </div>
+                </div>
+                <i class="fas fa-trash" onclick="removeItem(${index})" style="color:#ff4757; cursor:pointer"></i>
+            </div>
+        `;
+    });
+
+    // Atualiza Contador e Preço Total
+    cartCount.innerText = cart.length;
+    totalPriceEl.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
-/* Seção Sobre */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-top: 30px; }
-.about-grid img { width: 100%; border-radius: 10px; }
-.about-text { line-height: 1.8; font-size: 1.1rem; color: #555; }
-
-/* Carrinho Sidebar */
-.cart-sidebar {
-    position: fixed; right: -100%; top: 0; width: 400px; height: 100%;
-    background: white; z-index: 2000; transition: 0.5s ease;
-    display: flex; flex-direction: column; padding: 30px;
+function saveCart() {
+    localStorage.setItem('vibe_store_cart', JSON.stringify(cart));
 }
-.cart-sidebar.active { right: 0; }
-.overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6); display: none; z-index: 1500;
-}
-.overlay.active { display: block; }
-.cart-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--light); padding-bottom: 20px; }
-.cart-item { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-.checkout-btn { background: #2ed573; color: white; border: none; padding: 18px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1.1rem; }
 
-footer { text-align: center; padding: 40px; background: var(--light); margin-top: 50px; color: #888; }
+function checkout() {
+    if (cart.length === 0) return alert("Sua sacola está vazia!");
+    alert("🚀 Pedido processado! Integrando com sistema de pagamento...");
+    cart = [];
+    saveCart();
+    updateUI();
+    closeCart();
+}
+
+// Iniciar app
+updateUI();
